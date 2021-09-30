@@ -8,14 +8,14 @@ from subprocess import check_output
 import subprocess
 import re
 import csv
-
+import pandas as pd
 def create_addresses():
 	y=1
 	while y<=100: #change the number if you want to generate more or less addresses
 		out = check_output(['./clamd','getnewaddress',''])#./bitcoin-cli for Bitcoin
 		print (out)
 		y+=1
-	outt = check_output(['./clamd','getaddressesbyaccount',''])#./bitcoin-cli for Bitcoin
+	outt = check_output(['./clamd','getaddrdaessesbyaccount',''])#./bitcoin-cli for Bitcoin
 	addr=re.findall('"(.+?)"',str(outt))
 	L=[]
 	with open('addresses.db') as csvfile:
@@ -76,10 +76,10 @@ def check_double():
 	
 ##################################################################
 tot=check_addresses()
-print ('TOTAL CURRENT ADDRS:',tot)
+print (' CURRENT TOTAL ADDRS:',tot)
 if tot <=1:
 	print("I'm creating 100 new addresses")
 	new_addrs=create_addresses()
-	print ('Number of new wallet:',new_addrs)
+	print ('Number of the new wallet are:',new_addrs)
 check_double()
 ###################################################################
